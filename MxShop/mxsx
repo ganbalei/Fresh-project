@@ -1,0 +1,60 @@
+1.前后端分离优缺点
+    为什么要前后端分离
+        1.pc,app,pad多端适应
+        2.SPA开发模式开始流行
+        3.前后端开发职责不清
+        4.开发效率问题，前后端互相等待
+        5.后台开发语言和模板高度耦合，导致开发语言严重依赖
+    前后端分离缺点
+        1.前后端学习门槛增加
+        2.数据依赖导致文档重要性增加
+        3.前端工作量加大
+        4.SEO的难度加大
+        5.后端开发模式迁移增加成本
+2.restful api
+    restful api 目前是前后端分离最佳实践
+        1.轻量，直接通过https，不需要额外的协议，post/get/put/delete操作
+        2.面向资源，一目了然，具有自解释性
+3.几个概念
+    1.前端工程化
+    2.数据双向绑定
+    3.组件化开发
+4.Vue开发的几个概念
+    1.webpack
+      转换为JS文件
+    2.vue, vuex, vue-router, axios
+     框架 组件通信 组件跳转 替换ajax
+    3.ES6, babel
+           转换ES6为ES5
+
+GenericViewSet(viewset) - drf
+    GenericAPIView      - drf
+        APIView         - drf
+            View        - django
+
+mixin
+    CreateModelMixin
+    ListModelMixin
+    RetrieveModelMixin
+    UpdateModelMixin
+    DestroyModelMixin
+
+跨域
+        pip install django-cors-headers
+    and then add it to your installed apps:
+
+        INSTALLED_APPS = [
+            ...
+            'corsheaders',
+            ...
+        ]
+    You will also need to add a middleware class to listen in on responses:
+
+        MIDDLEWARE = [  # Or MIDDLEWARE_CLASSES on Django < 1.10
+            ...
+            'corsheaders.middleware.CorsMiddleware',
+            'django.middleware.common.CommonMiddleware',
+            ...
+        ]
+    CORS_ORIGIN_ALLOW_ALL
+    If True, the whitelist will not be used and all origins will be accepted. Defaults to False.
