@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,8 +76,6 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -170,6 +169,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 SOCIAL_AUTH_WEIBO_KEY = '3832728633'
 SOCIAL_AUTH_WEIBO_SECRET = '587c9f00d20324da1168dcd9e3b02fb3'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index/'
