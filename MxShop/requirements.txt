@@ -1,0 +1,17 @@
+django==1.11.16
+markdown
+pillow
+pymysql
+django-cors-headers
+django-crispy-forms
+django-filter
+django-redis
+djangorestframework
+djangorestframework-jwt
+drf-extensions
+pycryptodome
+requests
+redis
+six
+social-auth-app-django
+social-auth-core
