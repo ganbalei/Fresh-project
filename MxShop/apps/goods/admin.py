@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Goods, GoodsCategory, GoodsImage, GoodsCategoryBrand, Banner
+from .models import Goods, GoodsCategory, GoodsImage, GoodsCategoryBrand, Banner, HotSearchWords, IndexAd
 
 @admin.register(Goods)
 class GoodsAdmin(admin.ModelAdmin):
@@ -41,3 +41,11 @@ class GoodsBrandAdmin(admin.ModelAdmin):
 @admin.register(Banner)
 class BannerGoodsAdmin(admin.ModelAdmin):
     list_display = ["goods", "image", "index"]
+
+@admin.register(HotSearchWords)
+class HotSearchWordsAdmin(admin.ModelAdmin):
+    list_display = ["keywords", "index"]
+
+@admin.register(IndexAd)
+class IndexAdAdmin(admin.ModelAdmin):
+    list_display = ["category", "goods"]

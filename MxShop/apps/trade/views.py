@@ -22,6 +22,26 @@ class ShoppingCartViewset(viewsets.ModelViewSet):
     authentication_classes = [JSONWebTokenAuthentication, SessionAuthentication]
     lookup_field = 'goods_id'
 
+    def perform_create(self, serializer):
+        shop_cart = serializer.save()
+        goods = shop_cart.goods
+        goods.goods_num -= shop_cart.nums
+        goods.save()
+
+    def perform_destroy(self, instance):
+        goods = instance.goods
+        goods.goods_num += instance.nums
+        instance.delete()
+
+    def perform_update(self, serializer):
+        existed_record = ShoppingCart.objects.get(id=serializer.instance.id)
+        existed_nums = existed_record.nums
+        saved_record = serializer.save()
+        nums = saved_record.nums-existed_nums
+        goods = saved_record.goods
+        goods.goods_num -= nums
+        serializer.save()
+
     def get_queryset(self):
         return ShoppingCart.objects.filter(user=self.request.user)
 

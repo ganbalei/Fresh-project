@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 
-let host = 'http://shop.projectsedu.com';
 let localhost = 'http://127.0.0.1:8000';
 
 //获取商品类别信息

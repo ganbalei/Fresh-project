@@ -74,7 +74,7 @@ class SmsCodeViewset(CreateModelMixin, viewsets.GenericViewSet):
                 'mobile': mobile
             }, status=status.HTTP_201_CREATED)
 
-class UserViewSet(CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class UserViewset(CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
     create:
         创建用户
@@ -90,9 +90,9 @@ class UserViewSet(CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveMode
         return UserDetailSerializer
 
     def get_permissions(self):
-        if self.action == 'create':
-            return []
-        return [permissions.IsAuthenticated(), ]
+        if self.action == 'retrieve':
+            return [permissions.IsAuthenticated(), ]
+        return []
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

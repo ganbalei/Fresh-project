@@ -36,7 +36,7 @@ class LeavingMessageSerializer(serializers.ModelSerializer):
 class AddressSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     add_time = serializers.DateTimeField(read_only=True, format="%Y-%m-%d %H:%M")
-    signer_mobile = serializers.CharField(max_length=11)
+    signer_mobile = serializers.CharField(max_length=11, label="电话")
 
     def validate_signer_mobile(self, signer_mobile):
         """

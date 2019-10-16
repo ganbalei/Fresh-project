@@ -8,12 +8,14 @@ from .models import UserFav, UserLeavingMessage, UserAddress
 from .serializers import UserFavSerializer, UserFavDetailSerializer, LeavingMessageSerializer, AddressSerializer
 from utils.permissions import IsOwnerOrReadOnly
 
-class UserFavViewset(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+class UserFavViewset(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
     """
     list:
         获取用户收藏列表
     create:
         收藏商品
+    retrieve:
+        判断某个商品是否已经收藏
     delete:
         取消收藏
     """
@@ -24,17 +26,25 @@ class UserFavViewset(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Dest
     def get_queryset(self):
         return UserFav.objects.filter(user=self.request.user)
 
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        goods = instance.goods
+        goods.fav_num += 1
+        goods.save()
+
     def get_serializer_class(self):
         if self.action == 'list':
             return UserFavDetailSerializer
         return UserFavSerializer
 
-class LeavingMessageViewset(mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+class LeavingMessageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
     list:
         获取用户留言
     create:
         添加留言
+    retrieve:
+        留言详情
     delete:
         删除留言功能
     """
